@@ -12,7 +12,7 @@ type NavbarItemProps = {
 };
 const NavbarItem = ({ label, path, icon: Icon }: NavbarItemProps) => {
   const pathname = usePathname();
-  const isActive = pathname === path;
+  const isActive = pathname === path || pathname.includes(path);
   return (
     <Link
       href={path}

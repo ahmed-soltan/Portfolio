@@ -2,13 +2,26 @@
 
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import lightLogo from "../../../public/avatar2.png";
 import darkLogo from "../../../public/darkAvatar.png";
+
 const Logo = () => {
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    // Render a placeholder or nothing until the theme is resolved on the client side
+    return null;
+  }
+
   return (
     <div>
-      {theme === "dark" ? (
+      {resolvedTheme === "dark" ? (
         <Image
           src={darkLogo}
           alt="my Avatar"
@@ -16,7 +29,7 @@ const Logo = () => {
           height={150}
           className="object-cover"
         />
-      ) : theme === "light" ?(
+      ) : (
         <Image
           src={lightLogo}
           alt="my Avatar"
@@ -24,7 +37,7 @@ const Logo = () => {
           height={150}
           className="object-cover"
         />
-      ):null}
+      )}
     </div>
   );
 };

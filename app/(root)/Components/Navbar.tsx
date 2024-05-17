@@ -1,10 +1,7 @@
 import { ModeToggle } from "@/components/DarkModeButton";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import Image from "next/image";
-import logo from "../../../public/avatar.png";
 import Link from "next/link";
-import { BracesIcon, Menu } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
 import Logo from "./Logo";
 export default async function Navbar() {
@@ -18,7 +15,7 @@ export default async function Navbar() {
         </Link>
       </div>
       <div className="flex items-center gap-3">
-        <h1>Hello, {user?.firstName}</h1>
+        <h1>Hello, {user?.firstName ? user?.firstName :"Guest"}</h1>
         <SignedOut>
           <SignInButton />
         </SignedOut>

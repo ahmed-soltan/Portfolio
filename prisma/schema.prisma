@@ -1,0 +1,58 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Profile {
+    id               String             @id @default(auto()) @map("_id") @db.ObjectId
+    title            String?
+    description      String?
+    cv               String?
+    socialMediaLinks SocialMediaLinks[]
+
+    projects Projects[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    skills    Skills[]
+}
+
+model Projects {
+    id          String @id @default(auto()) @map("_id") @db.ObjectId
+    repoLink    String
+    demoLink    String
+    thumbnail   String
+    video       String
+    title       String
+    description String
+
+    profileId String @db.ObjectId
+    profile   Profile @relation(fields: [profileId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Skills {
+    id    String @id @default(auto()) @map("_id") @db.ObjectId
+    skill String
+
+    profileId String @db.ObjectId
+    profile   Profile @relation(fields: [profileId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model SocialMediaLinks {
+    id   String @id @default(auto()) @map("_id") @db.ObjectId
+    app  String
+    link String
+
+    Profile   Profile? @relation(fields: [profileId], references: [id])
+    profileId String?  @db.ObjectId
+}
