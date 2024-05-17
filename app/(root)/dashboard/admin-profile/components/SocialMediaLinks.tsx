@@ -10,16 +10,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
-import { ExternalLink, Facebook, Link2, LucideIcon, Pencil, X } from "lucide-react";
+import { ExternalLink, Pencil, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { SocialMediaLinks } from "@prisma/client";
 import Link from "next/link";
 
-const SocialMediaLinksComponent = ({ socialMediaLinks, profileId }: { socialMediaLinks: {
-  app: string;
-  link: string;
-}[]; profileId: string }) => {
+const SocialMediaLinksComponent = ({
+  socialMediaLinks,
+  profileId,
+}: {
+  socialMediaLinks: {
+    app: string;
+    link: string;
+  }[];
+  profileId: string;
+}) => {
   const [isEditting, setIsEditting] = useState(false);
   const router = useRouter();
   const form = useForm({
@@ -35,26 +40,31 @@ const SocialMediaLinksComponent = ({ socialMediaLinks, profileId }: { socialMedi
   });
 
   const onSubmit = async (data: FieldValues) => {
-    const LinksData ={
+    const LinksData = {
       ...data,
-      profileId:profileId,
-    }
+      profileId: profileId,
+    };
     try {
-      await axios.patch(`/api/profile/${profileId}/socialMediaLinks`, LinksData);
+      await axios.patch(
+        `/api/profile/${profileId}/socialMediaLinks`,
+        LinksData
+      );
       router.refresh();
     } catch (error) {
       console.log(error);
     } finally {
       setIsEditting(false);
     }
-    console.log(data)
+    console.log(data);
   };
 
   useEffect(() => {
     form.reset({ socialMediaLinks });
   }, [socialMediaLinks, form]);
 
-  const isChanged = JSON.stringify(form.getValues("socialMediaLinks")) !== JSON.stringify(socialMediaLinks);
+  const isChanged =
+    JSON.stringify(form.getValues("socialMediaLinks")) !==
+    JSON.stringify(socialMediaLinks);
 
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
@@ -120,7 +130,7 @@ const SocialMediaLinksComponent = ({ socialMediaLinks, profileId }: { socialMedi
                     </FormItem>
                   )}
                 />
-               
+
                 <Button
                   variant={"destructive"}
                   size={"sm"}
@@ -130,23 +140,35 @@ const SocialMediaLinksComponent = ({ socialMediaLinks, profileId }: { socialMedi
                 </Button>
               </div>
             ))}
-            <Button type="button" className="mx-2" onClick={() => append({ app: "", link: "" })}>
+            <Button
+              type="button"
+              className="mx-2"
+              onClick={() => append({ app: "", link: "" })}
+            >
               Add Link
             </Button>
-            <Button type="submit" variant={"success"} disabled={isSubmitting || !isValid || !isChanged}>
+            <Button
+              type="submit"
+              variant={"success"}
+              disabled={isSubmitting || !isValid || !isChanged}
+            >
               Save
             </Button>
           </form>
         </Form>
-      ) : socialMediaLinks.length>0 ? (
+      ) : socialMediaLinks.length > 0 ? (
         <ul className="text-base text-slate-700 dark:text-slate-400 flex flex-col gap-2">
-          {socialMediaLinks.map((link, index) =>{
+          {socialMediaLinks.map((link, index) => {
             return (
-              <Link href={link.link} key={index} className=" text-sky-700 dark:text-sky-400 underline w-[130px] px-2 rounded-md flex items-center gap-2">
-                  <ExternalLink className="w-4 h-4"/>
-                  {link.app}
+              <Link
+                href={link.link}
+                key={index}
+                className=" text-sky-700 dark:text-sky-400 underline w-[130px] px-2 rounded-md flex items-center gap-2"
+              >
+                <ExternalLink className="w-4 h-4" />
+                {link.app}
               </Link>
-            )
+            );
           })}
         </ul>
       ) : (
