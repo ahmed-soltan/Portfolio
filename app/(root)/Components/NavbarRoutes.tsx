@@ -3,6 +3,7 @@ import { Award, Boxes, Grid, Layers, Mail, Pen, User } from "lucide-react";
 import NavbarItem from "./NavbarItem";
 
 const NavbarRoutes = ({ emailAddress }: { emailAddress: string | undefined }) => {
+  console.log(emailAddress)
   const routes = [
     {
       path: '/profile',
@@ -31,7 +32,6 @@ const NavbarRoutes = ({ emailAddress }: { emailAddress: string | undefined }) =>
     },
   ];
 
-  // Push Dashboard route only if emailAddress matches
   if (emailAddress === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
     routes.push({
       path: '/dashboard',
@@ -39,6 +39,8 @@ const NavbarRoutes = ({ emailAddress }: { emailAddress: string | undefined }) =>
       icon: Boxes
     });
   }
+
+  
 
   return (
     <div className="flex items-start gap-3 border-r-[.5px] flex-col h-full pt-3">
