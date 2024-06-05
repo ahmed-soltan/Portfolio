@@ -16,6 +16,7 @@ const AdminSkills = async () => {
         select: {
           id:true,
           skill: true,
+          icon: true
         },
       },
     },

@@ -17,7 +17,7 @@ const DashboardNavItem = ({
   icon: Icon,
 }: DashboardNavItemProps) => {
   const pathname = usePathname();
-  const isActive = pathname === path;
+  const isActive = pathname === path || pathname.includes(path);
   return (
     <Link href={path}>
       <Button variant={isActive ? "secondary" : "outline"} className={cn(isActive && "border border-slate-700")}>
