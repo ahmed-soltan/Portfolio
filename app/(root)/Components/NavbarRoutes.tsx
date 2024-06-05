@@ -3,7 +3,6 @@ import { Award, Boxes, Grid, Layers, Mail, Pen, User } from "lucide-react";
 import NavbarItem from "./NavbarItem";
 
 const NavbarRoutes = ({ emailAddress }: { emailAddress: string | undefined }) => {
-  console.log(emailAddress)
   const routes = [
     {
       path: '/profile',
