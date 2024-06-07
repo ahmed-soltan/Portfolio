@@ -19,6 +19,8 @@ import ProjectTechnologies from "./ProjectTechnologies";
 import ProjectCategory from "./ProjectCategory";
 import ProjectVideo from "./ProjectVideo";
 import ProjectThumbnail from "./ProjectThumbnail";
+import ProjectRepoLink from "./ProjectRepoLink";
+import ProjectDemoLink from "./ProjectDemoLink";
 
 type AddProjectFormProps = {
   profileId: string;
@@ -32,6 +34,8 @@ const formSchema = z.object({
   description: z.string().min(3, {
     message: "Product description must be at least 3 characters.",
   }),
+  repoLink:z.string(),
+  demoLink:z.string(),
   isPublished: z.boolean(),
   technology: z.string(),
 });
@@ -47,6 +51,8 @@ const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
       category: "",
       description: "",
       technology: "",
+      repoLink: "",
+      demoLink: "",
       isPublished: false,
     },
   });
@@ -60,14 +66,14 @@ const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
     getValues("category"),
     thumbnail,
     video,
-    technologies.length>0,
+    technologies.length > 0,
   ];
   const onClick = (tech: string) => {
     setTechnologies((prev) => [...prev, tech]);
   };
   const onDeleteTechnology = (tech: string) => {
-    console.log(tech)
-    setTechnologies((prev) => prev.filter((techno) => techno!== tech));
+    console.log(tech);
+    setTechnologies((prev) => prev.filter((techno) => techno !== tech));
   };
 
   const totalFields = requiredField.length;
@@ -77,22 +83,23 @@ const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
   const isComplete = requiredField.every(Boolean);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const productData = {
+    const projectData = {
       ...data,
       technologies: technologies,
       thumbnail: thumbnail,
       video: video,
       profileId: profileId,
     };
+
     try {
-      await axios.post(`/api/vendors/${profileId}/products`, productData);
-      toast.success("Product Created successfully");
+      await axios.post(`/api/profile/${profileId}/projects`, projectData);
+      toast.success("Project Created successfully");
       router.refresh();
+      router.push(`/dashboard/admin-projects`);
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
     } finally {
-      router.push(`/vendor/${profileId}/manage-products`);
     }
   };
   return (
@@ -117,21 +124,21 @@ const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
               className="space-y-4 mt-4 max-w-full"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-
               <ProjectTitle form={form} />
               <ProjectDescription form={form} />
               <ProjectCategory form={form} />
 
+              <ProjectRepoLink form={form} />
+              <ProjectDemoLink form={form} />
               <ProjectAvailabilty form={form} />
               <div className="flex justify-start gap-5">
-
-              <ProjectTechnologies
-                form={form}
-                onClick={onClick}
-                technologies={technologies}
-                onDeleteTechnology={onDeleteTechnology}
+                <ProjectTechnologies
+                  form={form}
+                  onClick={onClick}
+                  technologies={technologies}
+                  onDeleteTechnology={onDeleteTechnology}
                 />
-                </div>
+              </div>
               <Button
                 variant={"success"}
                 disabled={!isComplete || !isValid || isSubmitting}
@@ -141,8 +148,11 @@ const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
             </form>
           </Form>
           <div className="flex flex-col items-start gap-5 mt-4">
-            <ProjectVideo setVideo={setVideo} video={video}/>
-            <ProjectThumbnail setThumbnail={setThumbnail} thumbnail={thumbnail}/>
+            <ProjectVideo setVideo={setVideo} video={video} />
+            <ProjectThumbnail
+              setThumbnail={setThumbnail}
+              thumbnail={thumbnail}
+            />
           </div>
         </div>
       </div>

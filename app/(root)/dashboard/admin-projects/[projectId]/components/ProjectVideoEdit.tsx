@@ -6,26 +6,35 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import FileUpload from "@/components/file-upload";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
-const ProjectVideo = ({
+const ProjectVideoEdit = ({
   video,
   profileId,
+  projectId,
 }: {
   video: string;
   profileId: string;
+  projectId: string;
 }) => {
   const [isEditting, setIsEditting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [projectVideo, setProjectVideo] = useState("");
+  const [projectVideoEdit, setProjectVideoEdit] = useState("");
   const router = useRouter();
 
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      await axios.patch(`/api/profile/${profileId}`, { video: projectVideo });
+      await axios.patch(`/api/profile/${profileId}/projects/${projectId}`, {
+        video: projectVideoEdit,
+      });
       router.refresh();
+      toast.success("Project Video Updated");
+
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
+
     } finally {
       setIsEditting(false);
       setIsLoading(false);
@@ -57,15 +66,15 @@ const ProjectVideo = ({
         )}
       </div>
       {isEditting ? (
-        <div className="flex flex-col items-start gap-4">
-          {projectVideo && (
+        <div className="flex flex-col items-start gap-4 w-full">
+          {projectVideoEdit && (
             <div className="flex flex-col items-center justify-between p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md">
               <div className="flex items-center mb-2">
                 <File className="h-4 w-4 mr-2 flex-shrink-0" />
-                <p className="text-xs line-clamp-1">{projectVideo}</p>
+                <p className="text-xs line-clamp-1">{projectVideoEdit}</p>
               </div>
               <video className="w-full rounded-md" controls>
-                <source src={projectVideo} type="video/mp4" />
+                <source src={projectVideoEdit} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -75,29 +84,30 @@ const ProjectVideo = ({
             endpoint="projectVideo"
             onChange={(url) => {
               if (url) {
-                setProjectVideo(url);
+                setProjectVideoEdit(url);
               }
             }}
           />
           <Button
             type="submit"
             variant={"success"}
-            disabled={!projectVideo || isLoading}
+            disabled={!projectVideoEdit || isLoading}
             onClick={onSubmit}
           >
             Save
           </Button>
         </div>
       ) : video ? (
-        <Link
-          href={video}
-          className="flex items-center justify-between p-3 max-w-[500px] bg-sky-100 border-sky-200 text-sky-700 border-[2.5px] rounded-md hover:underline"
-        >
-          <div className="flex items-center">
+        <div className="flex flex-col items-center justify-between p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md">
+          <div className="flex items-center mb-2">
             <File className="h-4 w-4 mr-2 flex-shrink-0" />
             <p className="text-xs line-clamp-1">{video}</p>
           </div>
-        </Link>
+          <video className="w-full rounded-md" controls>
+            <source src={video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       ) : (
         <h1 className="text-base text-slate-700 dark:text-slate-400 italic">
           You Have Not Provided a Video
@@ -107,4 +117,4 @@ const ProjectVideo = ({
   );
 };
 
-export default ProjectVideo;
+export default ProjectVideoEdit;

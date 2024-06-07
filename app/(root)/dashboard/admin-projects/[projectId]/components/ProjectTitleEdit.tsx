@@ -8,49 +8,55 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
 import { Pencil, X } from "lucide-react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-const Description = ({
-  description,
+import axios from "axios";
+import ProjectTitle from "../../create-project/_components/ProjectTitle";
+import toast from "react-hot-toast";
+const ProjectTitleEdit = ({
+  projectTitle,
   profileId,
+  projectId,
 }: {
-  description: string;
+  projectTitle: string;
   profileId: string;
+  projectId: string;
 }) => {
   const [isEditting, setIsEditting] = useState(false);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
-      description: description || "",
+      title: projectTitle || "",
     },
   });
 
   const { isSubmitting, isValid } = form.formState;
 
-
-  const isChanged = form.getValues("description") !== description;
-
-
   const onSubmit = async (data: FieldValues) => {
     try {
-      await axios.patch(`/api/profile/${profileId}`, data);
+      await axios.patch(
+        `/api/profile/${profileId}/projects/${projectId}`,
+        data
+      );
       router.refresh();
+      toast.success("Project Title updated");
     } catch (error) {
       console.log(error);
+      toast.error("Something went wrong");
+
     } finally {
       setIsEditting(false);
     }
   };
-
-
+  useEffect(() => {}, []);
+  const isChanged = form.getValues("title") !== projectTitle;
 
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Description</h1>
+        <h1 className="text-xl lg:text-2xl font-medium">Title</h1>
         {isEditting ? (
           <Button
             variant={"default"}
@@ -77,22 +83,7 @@ const Description = ({
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-4 w-full"
           >
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      placeholder='e.g. "I am a Web Developer..."'
-                      {...field}
-                      className="max-w-[500px] h-[250px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <ProjectTitle form={form} />
             <Button
               type="submit"
               variant={"success"}
@@ -102,15 +93,17 @@ const Description = ({
             </Button>
           </form>
         </Form>
-      ) : description ? (
-        <h1 className="text-base text-slate-700 dark:text-slate-400 ">
-          {description}
+      ) : projectTitle ? (
+        <h1 className="text-base text-slate-700 dark:text-slate-400">
+          {projectTitle}
         </h1>
       ) : (
-        <h1 className="text-base text-slate-700 dark:text-slate-400 italic">You Have Not Provided a Description</h1>
+        <h1 className="text-base text-slate-700 dark:text-slate-400 italic">
+          You Have Not Provided a ProjectTitle
+        </h1>
       )}
     </div>
   );
 };
 
-export default Description;
+export default ProjectTitleEdit;

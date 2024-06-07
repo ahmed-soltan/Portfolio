@@ -3,46 +3,54 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { Pencil, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import axios from 'axios'
-const Title = ({title , profileId}:{title:string , profileId:string}) => {
+import axios from "axios";import toast from "react-hot-toast";
+import ProjectCategory from "../../create-project/_components/ProjectCategory";
+const ProjectCategoryEdit = ({
+  projectCategory,
+  profileId,
+  projectId,
+}: {
+  projectCategory: string;
+  profileId: string;
+  projectId: string;
+}) => {
   const [isEditting, setIsEditting] = useState(false);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
-      title: title||"",
+      category: projectCategory || "",
     },
   });
 
-  const {isSubmitting , isValid} = form.formState;
+  const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      await axios.patch(`/api/profile/${profileId}`,data);
-      router.refresh()
+      await axios.patch(
+        `/api/profile/${profileId}/projects/${projectId}`,
+        data
+      );
+      router.refresh();
+      toast.success("Project Category updated");
     } catch (error) {
-      console.log(error)
-    }finally {
-      setIsEditting(false)
+      console.log(error);
+      toast.error("Something went wrong");
+
+    } finally {
+      setIsEditting(false);
     }
   };
-  useEffect(()=>{
-    
-  },[])
-  const isChanged = form.getValues("title") !== title;
+  useEffect(() => {}, []);
+  const isChanged = form.getValues("category") !== projectCategory;
 
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Title</h1>
+        <h1 className="text-xl lg:text-2xl font-medium">Category</h1>
         {isEditting ? (
           <Button
             variant={"default"}
@@ -69,36 +77,27 @@ const Title = ({title , profileId}:{title:string , profileId:string}) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-4 w-full"
           >
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder='e.g. "Hello, My Name is Ahmed..."'
-                      {...field}
-                      className="max-w-[500px]"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" variant={"success"} disabled={isSubmitting || !isValid || !isChanged}>
+            <ProjectCategory form={form} />
+            <Button
+              type="submit"
+              variant={"success"}
+              disabled={isSubmitting || !isValid || !isChanged}
+            >
               Save
             </Button>
           </form>
         </Form>
-      ) :title ? (
+      ) : projectCategory ? (
         <h1 className="text-base text-slate-700 dark:text-slate-400">
-          {title}
+          {projectCategory}
         </h1>
       ) : (
-        <h1 className="text-base text-slate-700 dark:text-slate-400 italic">You Have Not Provided a Title</h1>
+        <h1 className="text-base text-slate-700 dark:text-slate-400 italic">
+          You Have Not Provided a ProjectCategory
+        </h1>
       )}
     </div>
   );
 };
 
-export default Title;
+export default ProjectCategoryEdit;

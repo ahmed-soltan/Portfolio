@@ -23,7 +23,7 @@ const ProjectThumbnail = ({
 
       <div className="flex flex-col items-start gap-4 w-full">
         {thumbnail ? (
-          <div className="flex flex-col items-center justify-between p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md h-[330px] relative">
+          <div className="flex flex-col items-center justify-between p-3 w-full bg-slate-600 border-sky-200 border text-sky-700 rounded-md h-[330px] relative">
             <Image src={thumbnail} alt="Thumbnail" fill />
             <Button size={"sm"} variant={"destructive"} onClick={()=>setThumbnail("")} className="absolute top-0 right-0">Delete</Button>
           </div>

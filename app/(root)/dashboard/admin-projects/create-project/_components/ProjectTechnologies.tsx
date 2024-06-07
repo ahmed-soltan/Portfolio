@@ -58,12 +58,12 @@ const ProjectTechnologies = ({
           </FormItem>
         )}
       />
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-wrap">
         {technologies.length > 0 &&
           technologies.map((technology: string , index:number) => (
-            <h1 className="bg-slate-200 text-slate-800 px-2 flex gap-2 items-center" key={index}>
+            <h1 className="bg-slate-200 text-slate-800 px-2 flex gap-2 items-center rounded-sm font-medium" key={index}>
               {technology}
-              <X className="w-4 h-4 cursor-pointer" onClick={()=>onDeleteTechnology(technology)}/>
+              <X className="w-4 h-4 cursor-pointer font-thin" onClick={()=>onDeleteTechnology(technology)}/>
             </h1>
           ))}
       </div>
