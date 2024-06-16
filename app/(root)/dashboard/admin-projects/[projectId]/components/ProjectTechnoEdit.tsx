@@ -64,10 +64,14 @@ const ProjectTechnoEdit = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Technologies</h1>
+      {!isEditting ? (
+          <h1 className="text-xl">Technologies</h1>
+        ) : (
+          <div></div>
+        )}
         {isEditting ? (
           <Button
-            variant={"default"}
+            variant={"secondary"}
             onClick={() => setIsEditting(false)}
             size={"sm"}
           >
@@ -76,7 +80,7 @@ const ProjectTechnoEdit = ({
           </Button>
         ) : (
           <Button
-            variant={"default"}
+            variant={"secondary"}
             onClick={() => setIsEditting(true)}
             size={"sm"}
           >
@@ -111,7 +115,7 @@ const ProjectTechnoEdit = ({
           {projectTechnologies.length > 0 &&
             projectTechnologies.map((technology: string, index: number) => (
               <h1
-                className="bg-slate-200 text-slate-800 px-2 flex gap-2 items-center rounded-sm font-medium"
+                className="bg-slate-200 text-slate-800 px-2 flex gap-2 items-center rounded-sm"
                 key={index}
               >
                 {technology}

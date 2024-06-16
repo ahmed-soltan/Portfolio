@@ -44,10 +44,14 @@ const ProjectVideoEdit = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Project Video</h1>
+      {!isEditting ? (
+          <h1 className="text-xl">Project Video</h1>
+        ) : (
+          <div></div>
+        )}
         {isEditting ? (
           <Button
-            variant={"default"}
+            variant={"secondary"}
             onClick={() => setIsEditting(false)}
             size={"sm"}
           >
@@ -56,7 +60,7 @@ const ProjectVideoEdit = ({
           </Button>
         ) : (
           <Button
-            variant={"default"}
+            variant={"secondary"}
             onClick={() => setIsEditting(true)}
             size={"sm"}
           >

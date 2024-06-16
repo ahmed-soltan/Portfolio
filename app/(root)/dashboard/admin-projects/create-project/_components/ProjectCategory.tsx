@@ -14,7 +14,7 @@ const ProjectCategory = ({ form }: { form: any }) => {
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Project Category</h1>
+        <h1 className="text-xl">Project Category</h1>
       </div>
       <FormField
         control={form.control}

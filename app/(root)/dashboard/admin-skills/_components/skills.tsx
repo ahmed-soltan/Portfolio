@@ -70,7 +70,7 @@ const Skills = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Add Skills</h1>
+        <h1 className="text-xl">Add Skills</h1>
       </div>
 
       <Form {...form}>
@@ -119,7 +119,7 @@ const Skills = ({
       {skills.length ? (
         <div className="flex flex-col items-start gap-3 mt-2">
           <Separator />
-          <h1 className="text-xl lg:text-2xl font-medium">Your Skills</h1>
+          <h1 className="text-xl lg:text-2xl">Your Skills</h1>
 
           <ul className="flex flex-col items-start gap-2 mt-5 max-h-[450px] flex-wrap justify-between w-[500px]">
             {skills.map((skill) => (

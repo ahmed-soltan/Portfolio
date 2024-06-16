@@ -29,3 +29,31 @@ export const PATCH = async (
     });
   }
 };
+
+
+export const DELETE = async (
+  req: Request,
+  { params }: { params: { profileId: string; projectId: string } }
+) => {
+  try {
+
+    const project = await prisma.projects.delete({
+      where: {
+        id: params.projectId,
+        profileId: params.profileId,
+      },
+    });
+    return NextResponse.json({
+      project,
+      status: 200,
+    });
+  } catch (error: any) {
+    console.log(error);
+    return NextResponse.json({
+      message: error?.message,
+      status: 500,
+    });
+  }
+};
+
+

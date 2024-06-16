@@ -42,7 +42,7 @@ const Title = ({title , profileId}:{title:string , profileId:string}) => {
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Title</h1>
+        <h1 className="text-xl">Title</h1>
         {isEditting ? (
           <Button
             variant={"default"}

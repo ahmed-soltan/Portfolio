@@ -50,10 +50,14 @@ const ProjectCategoryEdit = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Category</h1>
+      {!isEditting ? (
+          <h1 className="text-xl">Category</h1>
+        ) : (
+          <div></div>
+        )}
         {isEditting ? (
           <Button
-            variant={"default"}
+            variant={"secondary"}
             onClick={() => setIsEditting(false)}
             size={"sm"}
           >
@@ -62,7 +66,7 @@ const ProjectCategoryEdit = ({
           </Button>
         ) : (
           <Button
-            variant={"default"}
+            variant={"secondary"}
             onClick={() => setIsEditting(true)}
             size={"sm"}
           >

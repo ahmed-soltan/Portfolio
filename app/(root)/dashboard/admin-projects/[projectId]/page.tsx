@@ -10,6 +10,10 @@ import ProjectAvailabilityEdit from "./components/ProjectAvailabilityEdit";
 import ProjectTechnoEdit from "./components/ProjectTechnoEdit";
 import ProjectRepoLinkEdit from "./components/ProjectRepoLinkEdit";
 import ProjectDemoLinkEdit from "./components/ProjectDemoLinkEdit";
+import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
+import axios from "axios";
+import ActionButton from "../_components/ActionButton";
 const page = async ({ params }: { params: { projectId: string } }) => {
   const user = await currentUser();
   if (
@@ -34,11 +38,13 @@ const page = async ({ params }: { params: { projectId: string } }) => {
     return null;
   }
 
-  console.log(project);
 
   return (
     <div className="flex flex-col gap-3 w-full py-5">
-      <h1 className="text-2xl font-medium">Project Details</h1>
+      <div className="flex items-center justify-between my-5">
+        <h1 className="text-2xl font-medium">Project Details</h1>
+        <ActionButton projectId={project.id} profileId={profile.id}/>
+      </div>
       <Separator />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4  w-full">
         <div className="flex items-start flex-col w-full gap-4">
@@ -83,7 +89,6 @@ const page = async ({ params }: { params: { projectId: string } }) => {
             projectId={params.projectId}
             projectDemoLink={project.demoLink}
           />
-
         </div>
         <div className="flex items-start flex-col w-full gap-5">
           <ProjectVideoEdit

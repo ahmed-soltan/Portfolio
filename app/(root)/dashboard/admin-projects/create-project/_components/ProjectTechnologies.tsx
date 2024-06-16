@@ -34,7 +34,7 @@ const ProjectTechnologies = ({
   return (
     <div className="flex flex-col items-start gap-4 w-full ">
       <div className="flex justify-between items-center w-full">
-        <h1 className="text-xl lg:text-2xl font-medium">Project Technolgies</h1>
+        <h1 className="text-xl">Project Technolgies</h1>
       </div>
       <FormField
         control={form.control}
@@ -61,7 +61,7 @@ const ProjectTechnologies = ({
       <div className="flex items-center gap-2 flex-wrap">
         {technologies.length > 0 &&
           technologies.map((technology: string , index:number) => (
-            <h1 className="bg-slate-200 text-slate-800 px-2 flex gap-2 items-center rounded-sm font-medium" key={index}>
+            <h1 className="bg-slate-200 text-slate-800 px-2 flex gap-2 items-center rounded-sm" key={index}>
               {technology}
               <X className="w-4 h-4 cursor-pointer font-thin" onClick={()=>onDeleteTechnology(technology)}/>
             </h1>
