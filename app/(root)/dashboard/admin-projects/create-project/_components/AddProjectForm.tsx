@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -65,7 +65,6 @@ const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
     getValues("description"),
     getValues("category"),
     thumbnail,
-    video,
     technologies.length > 0,
   ];
   const onClick = (tech: string) => {

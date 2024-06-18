@@ -7,7 +7,7 @@ import Logo from "./Logo";
 export default async function Navbar() {
   const user = await currentUser();
   return (
-    <header className="flex items-center justify-between border-b-[1px] shadow-sm p-2 h-full z-50 bg-white">
+    <header className="flex items-center justify-between border-b-[1px] shadow-sm p-2 h-full z-50 bg-white dark:bg-zinc-900">
       <div className="flex items-center gap-3">
         <MobileSidebar />
         <Link href={"/"} className="hidden md:block">

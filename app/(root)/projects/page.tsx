@@ -1,8 +1,17 @@
-import React from 'react'
+import prisma from "../../../lib/prismadb";
+import ProjectsContainer from "./_components/Projects";
 
-const page = () => {
+const page = async() => {
+  const projects = await prisma.projects.findMany();
+
+  if (!projects) {
+    return null;
+  }
+
   return (
-    <div>page</div>
+    <div className="px-2 lg:px-10 w-full flex flex-col items-center justify-center">
+      <ProjectsContainer projects={projects}/>
+    </div>
   )
 }
 

@@ -1,11 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { File, Pencil, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import FileUpload from "@/components/file-upload";
-import Link from "next/link";
 import toast from "react-hot-toast";
 
 const ProjectVideoEdit = ({

@@ -30,7 +30,7 @@ export default function RootLayout({
             <div className="h-[80px] inset-y-0 fixed z-50 w-full">
               <Navbar />
             </div>
-            <div className="hidden md:block pt-[80px] w-56 h-full inset-y-0 fixed z-50">
+            <div className="hidden md:block pt-[70px] w-56 h-full inset-y-0 fixed z-50">
               <Sidebar />
             </div>
             <main className="md:pl-56 pt-[80px] h-full z-0">{children}</main>
