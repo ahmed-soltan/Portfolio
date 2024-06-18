@@ -12,7 +12,7 @@ const ProjectVideoEdit = ({
   profileId,
   projectId,
 }: {
-  video: string;
+  video: string | null;
   profileId: string;
   projectId: string;
 }) => {
