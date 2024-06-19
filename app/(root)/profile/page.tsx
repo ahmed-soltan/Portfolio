@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Eye } from "lucide-react";
 import SocialMediaLink from "./_components/SocialMediaLink";
+import ProfilePhoneNumber from "./_components/PhoneNumber";
 
 const Profile = async () => {
   const profile = await prisma.profile.findFirst({
@@ -41,6 +42,7 @@ const Profile = async () => {
           {profile.socialMediaLinks.map((link) => {
             return <SocialMediaLink link={link} key={link.id}/>;
           })}
+          <ProfilePhoneNumber phoneNumber={profile.phoneNumber!} />
         </div>
       </div>
       <div className="relative w-[600px] h-[600px] hidden 2xl:block">
