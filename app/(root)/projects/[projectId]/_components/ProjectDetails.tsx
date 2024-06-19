@@ -33,7 +33,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
           </div>
         )}
       </div>
-      <div className="flex flex-col items-start gap-4 w-full">
+      <div className="flex flex-col items-start gap-4 w-full bg-white p-4 rounded-md">
         <h1 className="text-xl sm:text-3xl font-medium text-slate-800 dark:text-slate-100">
           {project.title}
         </h1>
@@ -60,8 +60,8 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
           {project.description}
         </p>
         <Separator className="dark:bg-slate-200" />
-        <div className="flex items-center gap-5 flex-wrap">
-          <Link href={project.repoLink} target="_blank">
+        <div className="flex items-center gap-5 flex-wrap w-full">
+          <Link href={project.repoLink} target="_blank" className="w-full">
             <Button
               variant={"secondary"}
               size={"sm"}
@@ -71,7 +71,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
               View Source Code
             </Button>
           </Link>
-          <Link href={project.demoLink} target="_blank">
+          <Link href={project.demoLink} target="_blank" className="w-full">
             <Button
               variant={"default"}
               size={"sm"}
