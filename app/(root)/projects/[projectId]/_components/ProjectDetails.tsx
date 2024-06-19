@@ -60,12 +60,12 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
           {project.description}
         </p>
         <Separator className="dark:bg-slate-200" />
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 flex-wrap">
           <Link href={project.repoLink} target="_blank">
             <Button
               variant={"secondary"}
               size={"sm"}
-              className="flex items-center"
+              className="flex items-center w-full"
             >
               <FaGithub size={20} className="mr-2" />
               View Source Code
@@ -75,7 +75,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
             <Button
               variant={"default"}
               size={"sm"}
-              className="flex items-center"
+              className="flex items-center w-full"
             >
               <FaEye size={20} className="mr-2" />
               View Live Demo

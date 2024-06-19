@@ -22,7 +22,7 @@ const formSchema = z.object({
   message: z.string().min(3),
 });
 
-const ContactForm = () => {
+const ContactForm = ({signedIn}:{signedIn:boolean}) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -92,7 +92,8 @@ const ContactForm = () => {
               </FormItem>
             )}
           />
-          <Button disabled={isSubmitting}>Send</Button>
+                {!signedIn && <div className='text-rose-400'>You Have To be Signed in to send a Message</div>}
+          <Button disabled={isSubmitting || !signedIn}>Send</Button>
         </form>
       </Form>
     </div>
