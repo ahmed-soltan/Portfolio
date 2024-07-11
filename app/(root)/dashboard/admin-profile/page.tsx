@@ -6,6 +6,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import prisma from '../../../../lib/prismadb'
 import UploadCV from "./components/uploadCV";
 import PhoneNumber from "./components/PhoneNumber";
+import Email from "./components/Email";
 
 const Profile = async () => {
   try {
@@ -35,6 +36,8 @@ const Profile = async () => {
         <Title title={profile.title || "No Title"} profileId={profile.id} />
         <Separator />
         <Description description={profile.description || "No Description"} profileId={profile.id} />
+        <Separator />
+        <Email email={profile.email} profileId={profile.id} />
         <Separator />
         <PhoneNumber phoneNumber={profile.phoneNumber || "No phone Number"} profileId={profile.id} />
         <Separator />

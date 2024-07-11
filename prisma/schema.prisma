@@ -12,7 +12,8 @@ model Profile {
     title            String?
     description      String?
     cv               String?
-    phoneNumber String?
+    email            String?
+    phoneNumber      String?
     socialMediaLinks SocialMediaLinks[]
 
     projects Projects[]
@@ -32,7 +33,7 @@ model Projects {
     description  String
     category     String
     technologies String[]
-    isPublished Boolean @default(false)
+    isPublished  Boolean  @default(false)
 
     profileId String  @db.ObjectId
     profile   Profile @relation(fields: [profileId], references: [id])
@@ -62,12 +63,12 @@ model SocialMediaLinks {
     profileId String?  @db.ObjectId
 }
 
-model Message{
-    id String @id @default(auto()) @map("_id") @db.ObjectId
-    name String
-    email String
+model Message {
+    id      String @id @default(auto()) @map("_id") @db.ObjectId
+    name    String
+    email   String
     message String
 
-        createdAt DateTime @default(now())
+    createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
