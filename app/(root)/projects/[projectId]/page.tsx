@@ -17,7 +17,7 @@ const page = async({params}:{params:{projectId:string}}) => {
     }
     // console.log(project)
   return (
-    <div className="p-6 flex flex-col items-start gap-5 bg-slate-100 h-full"  >
+    <div className="p-6 flex flex-col items-start gap-5 bg-slate-100 min-h-screen"  >
         <Link href={"/projects"}>
             <Button variant={"link"} className="flex items-center">
                 <ArrowLeft className="w-4 h-4 mr-2" />

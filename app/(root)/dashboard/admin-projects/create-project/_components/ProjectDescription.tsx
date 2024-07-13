@@ -1,13 +1,12 @@
 "use client";
 
+import { Editor } from "@/components/editor";
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
 
 const ProjectDescription = ({ form }: { form: any }) => {
   return (
@@ -21,11 +20,7 @@ const ProjectDescription = ({ form }: { form: any }) => {
         render={({ field }) => (
           <FormItem className="w-full">
             <FormControl>
-              <Textarea
-                placeholder='e.g. "Multi-vendor Website"'
-                {...field}
-                className="max-w-full h-[250px]"
-              />
+            <Editor {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

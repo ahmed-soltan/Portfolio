@@ -1,10 +1,13 @@
 "use client";
 
+import { Preview } from "@/components/preview";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Projects } from "@prisma/client";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaEye, FaGithub } from "react-icons/fa6";
 
 interface ProjectDetailsProps {
@@ -12,12 +15,30 @@ interface ProjectDetailsProps {
 }
 
 const ProjectDetails = ({ project }: ProjectDetailsProps) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <Loader2 className="w-9 h-9 animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-1 2xl:grid-cols-2 gap-5">
+    <div className="flex flex-col items-center justify-center gap-5 w-full min-h-full">
       <div className="w-full">
         {project.video ? (
-          <div className="flex flex-col items-center justify-between p-1 rounded-xl border-4 border-slate-800 dark:border-slate-300">
-            <video className="rounded-xl" controls>
+          <div className="flex flex-col items-center justify-between h-[700px] w-full p-1 rounded-xl border-4 border-slate-800 dark:border-slate-300">
+            <video className="rounded-xl h-full w-full" controls>
               <source src={project.video} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -56,9 +77,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
           })}
         </div>
         <Separator className="dark:bg-slate-200" />
-        <p className="text-slate-700 text-sm max-w-full dark:text-slate-300">
-          {project.description}
-        </p>
+        <Preview value={project.description}/>
         <Separator className="dark:bg-slate-200" />
         <div className="flex items-center gap-5 flex-wrap w-full">
           <Link href={project.repoLink} target="_blank" className="w-full">

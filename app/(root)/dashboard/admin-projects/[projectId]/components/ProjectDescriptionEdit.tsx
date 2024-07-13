@@ -16,6 +16,7 @@ import axios from "axios";
 import ProjectTitle from "../../create-project/_components/ProjectTitle";
 import toast from "react-hot-toast";
 import ProjectDescription from "../../create-project/_components/ProjectDescription";
+import { Preview } from "@/components/preview";
 const ProjectDescriptionDescriptionEdit = ({
   projectDescription,
   profileId,
@@ -99,9 +100,7 @@ const ProjectDescriptionDescriptionEdit = ({
           </form>
         </Form>
       ) : projectDescription ? (
-        <h1 className="text-base text-slate-700 dark:text-slate-400">
-          {projectDescription}
-        </h1>
+        <Preview value={projectDescription}/>
       ) : (
         <h1 className="text-base text-slate-700 dark:text-slate-400 italic">
           You Have Not Provided a ProjectDescription
