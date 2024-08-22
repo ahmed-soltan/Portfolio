@@ -9,7 +9,7 @@ const page = async() => {
   }
 
   return (
-    <div className="px-2 lg:px-10 w-full flex flex-col items-center justify-center">
+    <div className="px-2 xl:px-10 w-full flex flex-col items-center justify-center">
       <ProjectsContainer projects={projects}/>
     </div>
   )

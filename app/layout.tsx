@@ -27,13 +27,13 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="h-[80px] inset-y-0 fixed z-50 w-full">
+            <div className="h-[60px] inset-y-0 fixed z-50 w-full">
               <Navbar />
             </div>
             <div className="hidden md:block pt-[70px] w-56 h-full inset-y-0 fixed z-50">
               <Sidebar />
             </div>
-            <main className="md:pl-56 pt-[80px] h-full z-0">{children}</main>
+            <main className="md:pl-56 pt-[60px] h-full z-0">{children}</main>
           </ThemeProvider>
         </body>
       </html>

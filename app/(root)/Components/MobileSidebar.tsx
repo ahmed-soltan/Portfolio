@@ -6,8 +6,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import logo from "../../../public/avatar.png";
-import Image from "next/image";
 import Sidebar from "./Sidebar";
 import { Separator } from "@/components/ui/separator";
 import Logo from "./Logo";
@@ -16,7 +14,7 @@ const MobileSidebar = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <Menu className="w-8 h-8 block md:hidden" />
+        <Menu className="w-7 h-7 block md:hidden" />
       </SheetTrigger>
       <SheetContent className="block md:hidden" side={"left"}>
         <SheetHeader>
