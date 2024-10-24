@@ -11,9 +11,14 @@ const Profile = async() => {
   
   const profile = await prisma.profile.findFirst({
     include:{
-      projects:true
+      projects:{
+        orderBy:{
+          updatedAt: "desc"
+        }
+      }
     }
   });
+
   if(!profile) {
     return <div>You are not authorized to view this page</div>
   }

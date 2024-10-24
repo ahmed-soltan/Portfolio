@@ -2,7 +2,11 @@ import prisma from "../../../lib/prismadb";
 import ProjectsContainer from "./_components/Projects";
 
 const page = async() => {
-  const projects = await prisma.projects.findMany();
+  const projects = await prisma.projects.findMany({
+    orderBy:{
+      updatedAt: "desc"
+    }
+  });
 
   if (!projects) {
     return null;

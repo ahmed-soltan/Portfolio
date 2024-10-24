@@ -34,11 +34,12 @@ const formSchema = z.object({
   description: z.string().min(3, {
     message: "Product description must be at least 3 characters.",
   }),
-  repoLink:z.string(),
-  demoLink:z.string(),
+  repoLink: z.string(),
+  demoLink: z.string(),
   isPublished: z.boolean(),
   technology: z.string(),
 });
+
 const AddProjectForm = ({ profileId }: AddProjectFormProps) => {
   const [technologies, setTechnologies] = useState<string[]>([]);
   const [thumbnail, setThumbnail] = useState("");
