@@ -14,7 +14,7 @@ import { Pencil, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from 'axios'
 const Title = ({title , profileId}:{title:string , profileId:string}) => {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -31,7 +31,7 @@ const Title = ({title , profileId}:{title:string , profileId:string}) => {
     } catch (error) {
       console.log(error)
     }finally {
-      setIsEditting(false)
+      setIsEditing(false)
     }
   };
   useEffect(()=>{
@@ -43,10 +43,10 @@ const Title = ({title , profileId}:{title:string , profileId:string}) => {
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
         <h1 className="text-xl">Title</h1>
-        {isEditting ? (
+        {isEditing ? (
           <Button
             variant={"default"}
-            onClick={() => setIsEditting(false)}
+            onClick={() => setIsEditing(false)}
             size={"sm"}
           >
             <X className="w-4 h-4 mr-2" />
@@ -55,7 +55,7 @@ const Title = ({title , profileId}:{title:string , profileId:string}) => {
         ) : (
           <Button
             variant={"default"}
-            onClick={() => setIsEditting(true)}
+            onClick={() => setIsEditing(true)}
             size={"sm"}
           >
             <Pencil className="w-4 h-4 mr-2" />
@@ -63,7 +63,7 @@ const Title = ({title , profileId}:{title:string , profileId:string}) => {
           </Button>
         )}
       </div>
-      {isEditting ? (
+      {isEditing ? (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

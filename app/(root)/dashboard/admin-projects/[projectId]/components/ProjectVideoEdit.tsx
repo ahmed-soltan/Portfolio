@@ -16,7 +16,7 @@ const ProjectVideoEdit = ({
   profileId: string;
   projectId: string;
 }) => {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [projectVideoEdit, setProjectVideoEdit] = useState("");
   const router = useRouter();
@@ -35,7 +35,7 @@ const ProjectVideoEdit = ({
       toast.error("Something went wrong");
 
     } finally {
-      setIsEditting(false);
+      setIsEditing(false);
       setIsLoading(false);
     }
   };
@@ -43,15 +43,15 @@ const ProjectVideoEdit = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-      {!isEditting ? (
+      {!isEditing ? (
           <h1 className="text-xl">Project Video</h1>
         ) : (
           <div></div>
         )}
-        {isEditting ? (
+        {isEditing ? (
           <Button
             variant={"secondary"}
-            onClick={() => setIsEditting(false)}
+            onClick={() => setIsEditing(false)}
             size={"sm"}
           >
             <X className="w-4 h-4 mr-2" />
@@ -60,7 +60,7 @@ const ProjectVideoEdit = ({
         ) : (
           <Button
             variant={"secondary"}
-            onClick={() => setIsEditting(true)}
+            onClick={() => setIsEditing(true)}
             size={"sm"}
           >
             <Pencil className="w-4 h-4 mr-2" />
@@ -68,7 +68,7 @@ const ProjectVideoEdit = ({
           </Button>
         )}
       </div>
-      {isEditting ? (
+      {isEditing ? (
         <div className="flex flex-col items-start gap-4 w-full">
           {projectVideoEdit && (
             <div className="flex flex-col items-center justify-between p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md">

@@ -8,7 +8,7 @@ import FileUpload from "@/components/file-upload";
 import Link from "next/link";
 
 const UploadCV = ({ cv, profileId }: { cv: string; profileId: string }) => {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [profileCv, setProfileCv] = useState("");
   const router = useRouter();
@@ -21,7 +21,7 @@ const UploadCV = ({ cv, profileId }: { cv: string; profileId: string }) => {
     } catch (error) {
       console.log(error);
     } finally {
-      setIsEditting(false);
+      setIsEditing(false);
       setIsLoading(false);
     }
   };
@@ -30,10 +30,10 @@ const UploadCV = ({ cv, profileId }: { cv: string; profileId: string }) => {
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
         <h1 className="text-xl">CV</h1>
-        {isEditting ? (
+        {isEditing ? (
           <Button
             variant={"default"}
-            onClick={() => setIsEditting(false)}
+            onClick={() => setIsEditing(false)}
             size={"sm"}
           >
             <X className="w-4 h-4 mr-2" />
@@ -42,7 +42,7 @@ const UploadCV = ({ cv, profileId }: { cv: string; profileId: string }) => {
         ) : (
           <Button
             variant={"default"}
-            onClick={() => setIsEditting(true)}
+            onClick={() => setIsEditing(true)}
             size={"sm"}
           >
             <Pencil className="w-4 h-4 mr-2" />
@@ -50,7 +50,7 @@ const UploadCV = ({ cv, profileId }: { cv: string; profileId: string }) => {
           </Button>
         )}
       </div>
-      {isEditting ? (
+      {isEditing ? (
         <div className="flex flex-col items-start gap-4">
           {profileCv && (
             <Link

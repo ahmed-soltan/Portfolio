@@ -26,7 +26,7 @@ const ProjectDescriptionDescriptionEdit = ({
   profileId: string;
   projectId: string;
 }) => {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -49,7 +49,7 @@ const ProjectDescriptionDescriptionEdit = ({
       toast.error("Something went wrong");
 
     } finally {
-      setIsEditting(false);
+      setIsEditing(false);
     }
   };
   useEffect(() => {}, []);
@@ -58,15 +58,15 @@ const ProjectDescriptionDescriptionEdit = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-      {!isEditting ? (
+      {!isEditing ? (
           <h1 className="text-xl">Project Description</h1>
         ) : (
           <div></div>
         )}
-        {isEditting ? (
+        {isEditing ? (
           <Button
             variant={"secondary"}
-            onClick={() => setIsEditting(false)}
+            onClick={() => setIsEditing(false)}
             size={"sm"}
           >
             <X className="w-4 h-4 mr-2" />
@@ -75,7 +75,7 @@ const ProjectDescriptionDescriptionEdit = ({
         ) : (
           <Button
             variant={"secondary"}
-            onClick={() => setIsEditting(true)}
+            onClick={() => setIsEditing(true)}
             size={"sm"}
           >
             <Pencil className="w-4 h-4 mr-2" />
@@ -83,7 +83,7 @@ const ProjectDescriptionDescriptionEdit = ({
           </Button>
         )}
       </div>
-      {isEditting ? (
+      {isEditing ? (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

@@ -10,10 +10,8 @@ import ProjectAvailabilityEdit from "./components/ProjectAvailabilityEdit";
 import ProjectTechnoEdit from "./components/ProjectTechnoEdit";
 import ProjectRepoLinkEdit from "./components/ProjectRepoLinkEdit";
 import ProjectDemoLinkEdit from "./components/ProjectDemoLinkEdit";
-import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
-import axios from "axios";
 import ActionButton from "../_components/ActionButton";
+
 const page = async ({ params }: { params: { projectId: string } }) => {
   const user = await currentUser();
   if (

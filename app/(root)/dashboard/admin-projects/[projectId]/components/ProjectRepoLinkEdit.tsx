@@ -19,7 +19,7 @@ const ProjectRepoLinkEdit = ({
   profileId: string;
   projectId: string;
 }) => {
-  const [isEditting, setIsEditting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
   const form = useForm({
     defaultValues: {
@@ -42,7 +42,7 @@ const ProjectRepoLinkEdit = ({
       toast.error("Something went wrong");
 
     } finally {
-      setIsEditting(false);
+      setIsEditing(false);
     }
   };
   useEffect(() => {}, []);
@@ -51,15 +51,15 @@ const ProjectRepoLinkEdit = ({
   return (
     <div className="flex flex-col items-start gap-2 w-full border-sky-500">
       <div className="flex justify-between items-center w-full">
-      {!isEditting ? (
+      {!isEditing ? (
           <h1 className="text-xl">Repo Link</h1>
         ) : (
           <div></div>
         )}
-        {isEditting ? (
+        {isEditing ? (
           <Button
             variant={"secondary"}
-            onClick={() => setIsEditting(false)}
+            onClick={() => setIsEditing(false)}
             size={"sm"}
           >
             <X className="w-4 h-4 mr-2" />
@@ -68,7 +68,7 @@ const ProjectRepoLinkEdit = ({
         ) : (
           <Button
             variant={"secondary"}
-            onClick={() => setIsEditting(true)}
+            onClick={() => setIsEditing(true)}
             size={"sm"}
           >
             <Pencil className="w-4 h-4 mr-2" />
@@ -76,7 +76,7 @@ const ProjectRepoLinkEdit = ({
           </Button>
         )}
       </div>
-      {isEditting ? (
+      {isEditing ? (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
