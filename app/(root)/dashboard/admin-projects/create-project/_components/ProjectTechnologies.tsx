@@ -54,7 +54,7 @@ const ProjectTechnologies = ({
                 </FormControl>
                 <SelectContent>
                   {skills.map((skill) => (
-                    <SelectItem value={skill.skill}>{skill.skill}</SelectItem>
+                    <SelectItem value={skill.skill} key={skill.id}>{skill.skill}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
