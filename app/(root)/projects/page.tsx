@@ -1,11 +1,14 @@
 import prisma from "../../../lib/prismadb";
 import ProjectsContainer from "./_components/Projects";
 
-const page = async() => {
+const page = async () => {
   const projects = await prisma.projects.findMany({
-    orderBy:{
-      updatedAt: "desc"
-    }
+    where: {
+      isPublished: true,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
   });
 
   if (!projects) {
@@ -14,9 +17,9 @@ const page = async() => {
 
   return (
     <div className="px-2 xl:px-10 w-full flex flex-col items-center justify-center">
-      <ProjectsContainer projects={projects}/>
+      <ProjectsContainer projects={projects} />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
