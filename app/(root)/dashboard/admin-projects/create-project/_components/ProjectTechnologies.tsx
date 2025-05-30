@@ -4,8 +4,6 @@ import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useSkills } from "../hooks/use-skills";
 import {
   Select,
   SelectContent,
@@ -13,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useSkills } from "../hooks/use-skills";
 
 type ProjectTechnologyProps = {
   form: any;
@@ -54,7 +53,9 @@ const ProjectTechnologies = ({
                 </FormControl>
                 <SelectContent>
                   {skills.map((skill) => (
-                    <SelectItem value={skill.skill} key={skill.id}>{skill.skill}</SelectItem>
+                    <SelectItem value={skill.skill} key={skill.id}>
+                      {skill.skill}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>

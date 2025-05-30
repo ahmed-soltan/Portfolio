@@ -23,8 +23,8 @@ const Profile = async () => {
   }
 
   return (
-    <div className="p-2 mb-10 flex items-center flex-wrap justify-center gap-5 h-full">
-      <div className="relative w-[600px] h-[400px] 2xl:hidden block">
+    <div className="p-2 mb-10 flex items-center flex-wrap xl:flex-nowrap justify-center gap-5 h-full">
+      <div className="relative w-[600px] h-[400px] xl:hidden block">
         <Image src={avatar} alt="avatar" fill className="object-contain" />
       </div>
       <div className="flex flex-col items-start gap-5 max-w-[700px] pb-10 lg:pb-0">
@@ -47,7 +47,7 @@ const Profile = async () => {
           <ProfileEmail email={profile.email!} />
         </div>
       </div>
-      <div className="relative w-[600px] h-[600px] hidden 2xl:block">
+      <div className="relative min-w-[600px] h-[600px] hidden xl:block">
         <Image src={avatar} alt="avatar" fill className="object-fit" />
       </div>
     </div>

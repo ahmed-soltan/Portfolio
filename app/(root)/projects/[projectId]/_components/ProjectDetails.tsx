@@ -34,11 +34,11 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 w-full min-h-screen">
+    <div className="flex items-start justify-start gap-5 w-full min-h-screen">
       <div className="w-full bg-white dark:bg-slate-200 rounded-md">
         {project.video ? (
           <div className="flex flex-col items-center justify-between h-[400px] lg:h-[600px]
-            p-1 rounded-xl border-4 border-slate-800 ">
+            p-1 rounded-xl border-2 border-slate-300 ">
             <video className="rounded-xl h-full w-full" controls>
               <source src={project.video} type="video/mp4" />
               Your browser does not support the video tag.
@@ -46,7 +46,7 @@ const ProjectDetails = ({ project }: ProjectDetailsProps) => {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-between p-1
-           border-slate-800 dark:border-slate-300 border-4 rounded-xl">
+           border-slate-300 dark:border-slate-300 border-2 rounded-xl">
             <Image
               src={project.thumbnail}
               alt={project.title}

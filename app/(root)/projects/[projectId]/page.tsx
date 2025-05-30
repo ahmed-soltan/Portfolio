@@ -15,8 +15,8 @@ const page = async({params}:{params:{projectId:string}}) => {
     if(!project){
         return null;
     }
-    // console.log(project)
-  return (
+
+    return (
     <div className="p-6 flex flex-col items-start gap-5 bg-slate-100 dark:bg-slate-950 min-h-screen"  >
         <Link href={"/projects"}>
             <Button variant={"link"} className="flex items-center p-0">
